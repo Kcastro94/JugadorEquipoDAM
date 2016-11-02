@@ -1,14 +1,13 @@
 package com.example.Model;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 /**
  * Created by usu32 on 19/10/2016.
  */
+
+@Entity
 public class Jugador {
 
     @Id
