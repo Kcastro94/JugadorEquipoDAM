@@ -13,21 +13,20 @@ import java.util.List;
  */
 public interface JugadorRepository extends JpaRepository<Jugador, Long> {
     public List<Jugador> findByNombreStartingWith(String nombre);
-    public List<Jugador> findByNumCanastasGreaterThanEqual(Integer numCanastas);
-    public List<Jugador> findByNumAsistenciasBetween(Integer min, Integer max);
+    public List<Jugador> findByCanastasGreaterThanEqual(Integer canastas);
+    public List<Jugador> findByAsistenciasBetween(Integer min, Integer max);
     public List<Jugador> findByPosicion(String posicion);
     public List<Jugador> findByFechaNacimientoBefore(LocalDate fechaNacimiento);
 
     @Query("Select jugador.posicion, AVG(jugador.canastas), AVG(jugador.asistencias), AVG(jugador.rebotes) " +
             "from Jugador jugador " +
             "GROUP BY jugador.posicion")
-    public List<Jugador> showStatisticsByPosition();
+    public List<Jugador> showAverageStatisticsByPosition();
 
-    /**
-     * Agrupar los jugadores por la posición del campo y devolver para cada grupo la siguiente información:
-     * la media de canastas, asistencias y rebotes.
-     *
-     * Lo mismo que el punto anterior pero devolviendo la media, el máximo y el mínimo de canastas, asistencias y rebotes.
-
-     */
+    @Query("Select jugador.posicion, AVG(jugador.canastas), MAX(jugador.canastas), MIN(jugador.canastas)," +
+            "AVG(jugador.asistencias), MAX(jugador.asistencias), MIN(jugador.asistencias)," +
+            "AVG(jugador.rebotes), MAX(jugador.rebotes), MIN(jugador.rebotes) " +
+            "from Jugador jugador " +
+            "GROUP BY jugador.posicion")
+    public List<Jugador> showAverageMaxMinStatisticsByPosition();
 }

@@ -1,14 +1,14 @@
 package com.example.Model;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 
 /**
  * Created by usu32 on 19/10/2016.
  */
+@Entity
 public class Jugador {
 
     @Id
@@ -33,6 +33,11 @@ public class Jugador {
 
     @Column
     private String posicion;
+
+    @JsonIgnore
+    @ManyToOne
+    private Equipo equipo;
+
 
     public Jugador(String nombre, LocalDate fechaNacimiento, Integer canastas, Integer asistencias, Integer rebotes, String posicion) {
         this.nombre = nombre;
@@ -99,6 +104,14 @@ public class Jugador {
         this.posicion = posicion;
     }
 
+    public Equipo getEquipo() {
+        return equipo;
+    }
+
+    public void setEquipo(Equipo equipo) {
+        this.equipo = equipo;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -125,6 +138,7 @@ public class Jugador {
                 ", asistencias=" + asistencias +
                 ", rebotes=" + rebotes +
                 ", posicion='" + posicion + '\'' +
+                ", equipo=" + equipo +
                 '}';
     }
 }
