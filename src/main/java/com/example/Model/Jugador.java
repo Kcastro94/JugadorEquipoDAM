@@ -39,13 +39,14 @@ public class Jugador {
     private Equipo equipo;
 
 
-    public Jugador(String nombre, LocalDate fechaNacimiento, Integer canastas, Integer asistencias, Integer rebotes, String posicion) {
+    public Jugador(String nombre, LocalDate fechaNacimiento, Integer canastas, Integer asistencias, Integer rebotes, String posicion, Equipo equipo) {
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
         this.canastas = canastas;
         this.asistencias = asistencias;
         this.rebotes = rebotes;
         this.posicion = posicion;
+        this.equipo = equipo;
     }
 
     public Long getId() {

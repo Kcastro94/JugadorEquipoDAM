@@ -40,8 +40,8 @@ public class EquipoService {
         equipoRepository.save(equipo5);
 
         System.out.println(equipoRepository.findByLocalidad("Localidad1"));
-        System.out.println(equipoRepository.findByNombre("Equipo1"));
-        System.out.println(equipoRepository.findByNombreAndPosicion("Equipo1", "Alero"));
-        System.out.println(equipoRepository.findJugadorByEquipoAndCanastas("Equipo3"));
+        System.out.println(equipoRepository.findJugadoresByEquipo("Equipo1"));
+        System.out.println(equipoRepository.findJugadoresByEquipoAndPosicion("Equipo2", "Pivot"));
+        System.out.println(equipoRepository.findByCanastasAndEquipo("Equipo3"));
     }
 }

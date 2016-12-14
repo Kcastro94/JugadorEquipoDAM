@@ -24,34 +24,31 @@ public class JugadorService {
     private EquipoRepository equipoRepository;
 
     public void testJugador(){
+
+        Equipo equipo1 = equipoRepository.findOne(1L);
+        Equipo equipo2 = equipoRepository.findOne(2L);
+        Equipo equipo3 = equipoRepository.findOne(3L);
+        Equipo equipo4 = equipoRepository.findOne(4L);
+        Equipo equipo5 = equipoRepository.findOne(5L);
+
         LocalDate date = LocalDate.of(1994,3,8);
-        Jugador jugador1 = new Jugador("Pau", date, 30, 5, 10, "Alero");
-        Equipo equipo = equipoRepository.findByNombre("Equipo1").get(0);
-        jugador1.setEquipo(equipo);
+        Jugador jugador1 = new Jugador("Pau", date, 30, 5, 10, "Alero", equipo1);
         jugadorRepository.save(jugador1);
 
         date = LocalDate.of(1990,5,10);
-        Jugador jugador2 = new Jugador("Juan", date, 25, 7, 12, "Pivot");
-        equipo = equipoRepository.findByNombre("Equipo2").get(0);
-        jugador2.setEquipo(equipo);
+        Jugador jugador2 = new Jugador("Juan", date, 25, 7, 12, "Pivot", equipo2);
         jugadorRepository.save(jugador2);
 
         date = LocalDate.of(1992,8,12);
-        Jugador jugador3 = new Jugador("Alfredo", date, 35, 3, 11, "Ala-Pivot");
-        equipo = equipoRepository.findByNombre("Equipo3").get(0);
-        jugador3.setEquipo(equipo);
+        Jugador jugador3 = new Jugador("Alfredo", date, 35, 3, 11, "Ala-Pivot", equipo3);
         jugadorRepository.save(jugador3);
 
         date = LocalDate.of(1986,3,2);
-        Jugador jugador4 = new Jugador("Francesc", date, 43, 10, 5, "Base");
-        equipo = equipoRepository.findByNombre("Equipo4").get(0);
-        jugador4.setEquipo(equipo);
+        Jugador jugador4 = new Jugador("Francesc", date, 43, 10, 5, "Base", equipo4);
         jugadorRepository.save(jugador4);
 
         date = LocalDate.of(1991,9,9);
-        Jugador jugador5 = new Jugador("Albert", date, 25, 7, 12, "Escolta");
-        equipo = equipoRepository.findByNombre("Equipo5").get(0);
-        jugador5.setEquipo(equipo);
+        Jugador jugador5 = new Jugador("Albert", date, 25, 7, 12, "Escolta", equipo5);
         jugadorRepository.save(jugador5);
 
         System.out.println(jugadorRepository.findByNombreStartingWith("Al"));

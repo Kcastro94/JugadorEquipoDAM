@@ -4,6 +4,7 @@ import com.example.Model.Equipo;
 import com.example.Model.Jugador;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,20 +15,13 @@ import java.util.List;
 public interface EquipoRepository extends JpaRepository<Equipo, Long> {
 
     public List<Equipo> findByLocalidad(String localidad);
-    public List<Equipo> findByNombre(String nombre);
 
-    /*mirar*/
-    public List<Equipo> findByNombreAndPosicion(String nombre, String posicion);
+    @Query("select jugador from Jugador jugador, Equipo equipo where equipo.id = jugador.equipo and equipo.nombre = :nombreEquipo")
+    public List<Jugador> findJugadoresByEquipo(@Param("nombreEquipo") String nombreEquipo);
 
-    /*mirar*/
-    @Query("Select jugador.nombre from Jugador jugador, Equipo equipo where jugador.equipo = equipo and MAX(jugador.canastas)")
-    public List<Equipo> findJugadorByEquipoAndCanastas(String equipo);
+    @Query("select jugador from Jugador jugador, Equipo equipo where equipo.id = jugador.equipo and equipo.nombre = :nombreEquipo and jugador.posicion = :posicionJugador")
+    public List<Jugador> findJugadoresByEquipoAndPosicion(@Param("nombreEquipo") String nombreEquipo, @Param("posicionJugador") String jugadorPosicion);
 
-    /**
-     a.	Consulta los equipos existentes en una localidad determinada.
-     b.	Devuelve todos los jugadores de un equipo, a partir del nombre completo del equipo.
-     c.	Devuelve todos los jugadores de un equipo, que además jueguen en la misma posición (parámetro adicional de la consulta), por ejemplo, alero.
-     d.	Devuelve el jugador que más canastas ha realizado de un equipo determinado como parámetro.
-
-     */
+    @Query("select jugador from Jugador jugador, Equipo equipo where equipo.id = jugador.equipo and equipo.nombre = :nombreEquipo order by canastas desc")
+    public List<Jugador> findByCanastasAndEquipo(@Param("nombreEquipo") String nombreEquipo);
 }
